@@ -34,6 +34,8 @@ interface AppState {
   trafficLevel: number;
   trafficPreset: TrafficPreset;
   isRushHour: boolean;
+  isNightMode: boolean;
+  weatherCondition: 'clear' | 'rain' | 'snow' | 'fog';
   barricades: { id: number; x: number; z: number; active: boolean }[];
   
   currentTime: Date;
@@ -48,6 +50,8 @@ interface AppState {
   setSensitivityLevel: (level: number) => void;
   setTrafficLevel: (level: number) => void;
   setTrafficPreset: (preset: TrafficPreset) => void;
+  setNightMode: (isNight: boolean) => void;
+  setWeatherCondition: (condition: 'clear' | 'rain' | 'snow' | 'fog') => void;
   toggleBarricade: (id: number) => void;
   updateTime: () => void;
 }
@@ -77,6 +81,8 @@ export const useAppStore = create<AppState>((set, get) => ({
   trafficLevel: 50,
   trafficPreset: 'normal',
   isRushHour: false,
+  isNightMode: true,
+  weatherCondition: 'clear',
   barricades: [
     { id: 1, x: 3, z: 4, active: false },
     { id: 2, x: 7, z: 6, active: false },
@@ -197,6 +203,14 @@ export const useAppStore = create<AppState>((set, get) => ({
         b.id === id ? { ...b, active: !b.active } : b
       ),
     }));
+  },
+  
+  setNightMode: (isNight: boolean) => {
+    set({ isNightMode: isNight, isRushHour: isNight });
+  },
+  
+  setWeatherCondition: (condition: 'clear' | 'rain' | 'snow' | 'fog') => {
+    set({ weatherCondition: condition });
   },
   
   updateTime: () => {

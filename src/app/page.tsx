@@ -5,6 +5,7 @@ import { RoutePanel } from '../components/ui/RoutePanel';
 import { ResultsPanel } from '../components/ui/ResultsPanel';
 import { Dashboard } from '../components/ui/Dashboard';
 import { TrafficPanel } from '../components/ui/TrafficPanel';
+import { EnvironmentPanel } from '../components/ui/EnvironmentPanel';
 
 const Scene = dynamic(() => import('../components/scene/Scene').then(mod => mod.Scene), {
   ssr: false,
@@ -27,6 +28,7 @@ export default function Home() {
       <ResultsPanel />
       <Dashboard />
       <TrafficPanel />
+      <EnvironmentPanel />
       
       <div className="absolute bottom-4 right-4 text-xs text-slate-600">
         Powered by AI Agents • UrbanPath AI System
